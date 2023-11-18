@@ -1,0 +1,31 @@
+
+.tituloDos{
+    font-weight: bold; /* Establece el texto en negrita */
+    letter-spacing: 2px; /* Añade un espacio de 2px entre las letras */
+    padding: 50px;  /* Aplica un padding de 2px alrededor del contenido de los elementos */
+}
+
+.txt-p{
+    text-align: justify;
+}
+
+.redes{
+    width: 20px;
+    height: 20px;
+}
+
+.myContenedor{
+    width: auto;      
+    float: left;    
+    margin-left: 30px;
+    padding: 90px;
+}
+    .contenido{
+        width: 500px;
+        height: 900px;
+    }
+
+    .barra{
+        width: 250px;
+        height: 350px;        
+    }
