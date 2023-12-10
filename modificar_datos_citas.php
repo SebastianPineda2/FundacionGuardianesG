@@ -1,10 +1,23 @@
+<?php
+
+include("php\connection.php");
+$con = connection();
+
+$id = $_GET['idCitas'];
+$sql = "SELECT * FROM agendacitas WHERE idCitas = '$id'";
+$query = mysqli_query($con, $sql);
+$row = mysqli_fetch_array($query);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="Img/favicon.png" type="imagen/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Más Información | Fundacion Guardianes Gatunos</title>
+    <title>Modificar Citas | Fundacion Guardianes Gatunos</title>
     <!-- BOOSTRAP CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- CSS Local -->
@@ -29,7 +42,7 @@
                     <!-- podemos cambiar el active -->
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Inicio<span class="sr-only">(current)</span></a>
-                    </li>
+                    </li>  
                     <li class="nav-item">
                         <a class="nav-link">Agenda citas</a>
                     </li>
@@ -38,10 +51,10 @@
                         <!-- Dropdown -->
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="citas_baños.php">Baños</a>           
+                            <a class="dropdown-item" href="citas_baños.php">Baños</a>         
                             <a class="dropdown-item" href="citas_peluqueria.php">Peluquería</a>                         
                         </div>
-                    </li>                                     
+                    </li>                                            
                     <li class="nav-item">
                         <a class="nav-link" href="pagina.html">Más información</a>
                     </li>        
@@ -50,37 +63,64 @@
         </nav>
     </div>
 
-    <div class="container py-4">
+    <div class="container py-4">       
         <div class="py-4 my-4">
             <figure class=" my-3 text-centerfigure">
-                <img src="img/gbienvenidos.jpg" class="figure-img img-fluid rounded" >
-            </figure>
-            <h3>¿Qué es y cómo salvan gatos?</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/rVP_G7S83IA?si=HE4bUTE1tJMhd0zG" allowfullscreen></iframe>
-            </div>                       
-            <p class="txt-p">¡Bienvenidos a un nuevo vídeo de ExpertoAnimal!</p>
-            <p> En esta ocasión os vamos a mostrar el increíble trabajo que realiza Guardianes Gatunos, una organización que tiene como misión mejorar la calidad de vida de los gatos sin hogar, esterilizar gatos de colonias y rescatar aquellos felinos abandonados para que encuentren una familia definitiva.</p>                        
+                <img src="img/imgmod.jpg" class="figure-img img-fluid rounded" >
+            </figure>            
         </div>
 
-        <h1 class="text-right">Recomendados</h1>
         <hr>
         <div class="py-4 my-4">
-            <h3>Curiosidades de los gatos</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MN4DQ_Vd0nE?si=V5Lff5dBgxo0Fiuf" allowfullscreen></iframe>
-            </div>                       
-            <p class="txt-p">En este vídeo de ExpertoAnimal te traemos una recopilación de 100 curiosidades sobre los gatos. Descubre un montón de datos, peculiaridades y curiosidades sobre el comportamiento, el carácter y la anatomía de los gatos. ¡Veamos cuáles no conocías todavía!</p>                        
-        </div>
+            
+            
+            <!-- Desde aqui se pega formulario para modificar datos de Base de datos-->
 
-        <div class="py-4 my-4">
-            <h3>¿Cómo se disculpan los gatos con los humanos?</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Ql6kS186fgQ?si=5LjgpMhquAMM4wTS" allowfullscreen></iframe>
-            </div>                       
-            <p class="txt-p">Aunque pueden parecer independientes, estos felinos tienen más sentimientos de lo que crees.</p>       
-            <p class="txt-p">¿Alguna vez te has preguntado si tu gato siente remordimiento tras una travesura? ¿O cómo te pide perdón tu peludo amigo? En este vídeo te voy a explicar los misterios detrás de las disculpas felinas.</p>                        
-        </div>        
+            <div class="py-4 my-4">
+            <h3 class="text-center py-3">Modificar citas</h3>
+            
+            <form action="php/regdit_citas_insertar.php" method="post">
+              <div class="form-row">
+                  <div class="form-group col-md-6">
+                      <label for="inputID">ID</label>
+                      <input type="hidden" class="form-control" name="id" value="<?php echo $id; ?> ">
+                  </div>
+                
+                  <div class="form-group col-md-6">
+                      <label for="inputNombreMascota">Nombre de la mascota</label>
+                      <input type="text" class="form-control"  name="nombreMascota" placeholder="Nombre completo" value="<?php echo $nombreMascota; ?>">
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="inputNombrePersona">Nombre de la persona</label>
+                      <input type="text" class="form-control" name="nombrePersona" placeholder="Nombre completo" value="<?php echo $nombrePersona; ?>">
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="inputEmail4">Correo electrónico</label>
+                      <input type="email" class="form-control" name="email" placeholder="Correo electrónico" value="<?php echo $email; ?>">
+                  </div>
+                  <div class="form-group col-md-6">
+                      <label for="inputNombrePersona">Celular</label>
+                      <input type="text" class="form-control"  name="celular" placeholder="Número celular" value="<?php echo $celular; ?>">
+                  </div>                  
+                  <div class="form-group col-md-6">
+                      <label for="inputCategoria">Categoría</label>
+                      <select  class="form-control" name="categoria" value="<?php echo $categoria; ?>">
+                          <option selected disabled>Seleccionar</option>
+                          <option value="Baño">Baño</option>
+                      </select>
+                  </div>                  
+              </div>
+                        
+              <div class="form-group">
+                  <label for="inputObservacion">Agregar más información</label>
+                  <input type="text" class="form-control" id="inputObservacion" name="observacion" placeholder="Información de la mascota" value="<?php echo $observacion; ?>">
+              </div>               
+              <center><button type="submit" class="btn btn-primary">Enviar</button></center>
+          </form>                     
+        </div>  
+            
+            
+        </div>       
 
     </div>
             
@@ -100,6 +140,7 @@
 
         <p class="text-white">© Copyright ©  2023 Guardianes Gatunos. Todos los derechos reservados.</p>        
     </footer> 
+    
 
     <!-- SECTION UNO -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

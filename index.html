@@ -30,7 +30,19 @@
                     <!-- podemos cambiar el active -->
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Inicio<span class="sr-only">(current)</span></a>
-                    </li>                                      
+                    </li>              
+                    <li class="nav-item">
+                        <a class="nav-link">Agenda citas</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                        
+                        <!-- Dropdown -->
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="citas_baños.php">Baños</a>         
+                            <a class="dropdown-item" href="citas_peluqueria.php">Peluquería</a>                         
+                        </div>
+                    </li>                                
                     <li class="nav-item">
                         <a class="nav-link" href="pagina.html">Más información</a>
                     </li>        
@@ -49,10 +61,11 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
         </ol>
         <div class="carousel-inner">
             <!-- Contenido -->
-            <!-- IMAGEN 1 -->
+            <!-- IMAGEN 0 -->
             <div class="carousel-item active">
                 <!-- puedo modificar el src y colocar la imagen deseada -->
                 <img class="d-block w-100" src="img/img4.jpg" alt="First slide">
@@ -62,21 +75,27 @@
                 </div>
 
             </div>
-            <!-- IMAGEN 2 -->
+            <!-- IMAGEN 1 -->
             <div class="carousel-item ">
                 <img class="d-block w-100" src="img/img3.jpg" alt="Second slide">
                 <div class="carousel-caption d-none d-md-block">                     
                 </div>
             </div>
-            <!-- IMAGEN 3 -->
+            <!-- IMAGEN 2 -->
             <div class="carousel-item">
                 <img class="d-block w-100" src="img/img2.jpg" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">                     
                 </div>
             </div>
-            <!-- IMAGEN 4 -->
+            <!-- IMAGEN 3 -->
             <div class="carousel-item">
                 <img class="d-block w-100" src="img/img1.jpg" alt="Third slide">
+                <div class="carousel-caption d-none d-md-block">                    
+                </div>
+            </div>
+            <!-- IMAGEN 4 -->
+            <div class="carousel-item">
+                <img class="d-block w-100" src="img/img5.jpg" alt="Third slide">
                 <div class="carousel-caption d-none d-md-block">                    
                 </div>
             </div>
@@ -94,8 +113,8 @@
     <!-- SLIDER -->
     <!-- SECTION UNO -->
     <!-- añadimos margenes -->
-    <section class="container my-5">
-        <h2 class="display-4 text-center text-primary tituloDos">Ayúdanos a Ayudar</h2>        
+    <section class="container my-2">
+        <h1 class="display-6 text-center text-primary tituloDos">¡Con tu aporte nos ayudas a salvar más vidas!</h1>        
         <!-- CARD -->
         <div class="card-deck">
             <!-- agregamos la clase row para poder colocar los atributos responsive -->

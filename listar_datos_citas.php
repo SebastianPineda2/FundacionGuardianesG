@@ -1,10 +1,22 @@
+
+<?php
+
+include("php\connection.php");
+$con = connection();
+$sql = "SELECT * FROM agendacitas";
+
+$query = mysqli_query($con, $sql);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="icon" href="Img/favicon.png" type="imagen/png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Más Información | Fundacion Guardianes Gatunos</title>
+    <title>Listar Citas | Fundacion Guardianes Gatunos</title>
     <!-- BOOSTRAP CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- CSS Local -->
@@ -29,7 +41,7 @@
                     <!-- podemos cambiar el active -->
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">Inicio<span class="sr-only">(current)</span></a>
-                    </li>
+                    </li>  
                     <li class="nav-item">
                         <a class="nav-link">Agenda citas</a>
                     </li>
@@ -38,10 +50,10 @@
                         <!-- Dropdown -->
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="citas_baños.php">Baños</a>           
+                            <a class="dropdown-item" href="citas_baños.php">Baños</a>         
                             <a class="dropdown-item" href="citas_peluqueria.php">Peluquería</a>                         
                         </div>
-                    </li>                                     
+                    </li>                                            
                     <li class="nav-item">
                         <a class="nav-link" href="pagina.html">Más información</a>
                     </li>        
@@ -50,39 +62,61 @@
         </nav>
     </div>
 
-    <div class="container py-4">
+    <div class="container py-4">       
         <div class="py-4 my-4">
             <figure class=" my-3 text-centerfigure">
-                <img src="img/gbienvenidos.jpg" class="figure-img img-fluid rounded" >
-            </figure>
-            <h3>¿Qué es y cómo salvan gatos?</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/rVP_G7S83IA?si=HE4bUTE1tJMhd0zG" allowfullscreen></iframe>
-            </div>                       
-            <p class="txt-p">¡Bienvenidos a un nuevo vídeo de ExpertoAnimal!</p>
-            <p> En esta ocasión os vamos a mostrar el increíble trabajo que realiza Guardianes Gatunos, una organización que tiene como misión mejorar la calidad de vida de los gatos sin hogar, esterilizar gatos de colonias y rescatar aquellos felinos abandonados para que encuentren una familia definitiva.</p>                        
+                <img src="img/imgBD.jpg" class="figure-img img-fluid rounded" >
+            </figure>            
         </div>
 
-        <h1 class="text-right">Recomendados</h1>
         <hr>
         <div class="py-4 my-4">
-            <h3>Curiosidades de los gatos</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MN4DQ_Vd0nE?si=V5Lff5dBgxo0Fiuf" allowfullscreen></iframe>
-            </div>                       
-            <p class="txt-p">En este vídeo de ExpertoAnimal te traemos una recopilación de 100 curiosidades sobre los gatos. Descubre un montón de datos, peculiaridades y curiosidades sobre el comportamiento, el carácter y la anatomía de los gatos. ¡Veamos cuáles no conocías todavía!</p>                        
-        </div>
+            
+            
+            <!-- Desde aqui se pega formulario para modificar datos de Base de datos-->
+            <h3 class="text-center py-3">Datos de citas</h3>
+                <div class="row">
+                  <div class="col">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>                            
+                          <th>Id</th>
+                          <th>Nombre gato</th>
+                          <th>Nombre dueño</th>
+                          <th>Correo</th>
+                          <th>Celular</th>
+                          <th>Categoria</th>
+                          <th>Observación</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php while($row = mysqli_fetch_array($query)):?>
+                            <tr>
+                                <th><?=$row['idCitas']?></th>
+                                <th><?=$row['nombreMascota']?></th>
+                                <th><?=$row['nombrePersona']?></th>
+                                <th><?=$row['email']?></th>
+                                <th><?=$row['celular']?></th>
+                                <th><?=$row['categoria']?></th>
+                                <th><?=$row['observacion']?></th>
+                                <th><a href="modificar_datos_citas.php?" class="users-table--edit">Editar</a></th>
 
-        <div class="py-4 my-4">
-            <h3>¿Cómo se disculpan los gatos con los humanos?</h3>
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/Ql6kS186fgQ?si=5LjgpMhquAMM4wTS" allowfullscreen></iframe>
-            </div>                       
-            <p class="txt-p">Aunque pueden parecer independientes, estos felinos tienen más sentimientos de lo que crees.</p>       
-            <p class="txt-p">¿Alguna vez te has preguntado si tu gato siente remordimiento tras una travesura? ¿O cómo te pide perdón tu peludo amigo? En este vídeo te voy a explicar los misterios detrás de las disculpas felinas.</p>                        
-        </div>        
-
+                                <th><a href="eliminar_cita.php?id=<?=$row['idCitas']?>" class="users-table--delete">Eliminar</a></th>
+                            </tr>
+                        <?php endwhile;?>
+                      </tbody>
+                    </table>
+                </div>
+            </div> 
+              
+            </div>  
+              <div class="py-4">
+                <a href="citas_baños.php"><button type="button" class="btn btn-danger">Atras</button></a>
+              </div> 
+            </div>
+            
     </div>
+    
             
     <footer class="bg-primary text-center py-4 sticky-bottom">       
        
@@ -100,6 +134,7 @@
 
         <p class="text-white">© Copyright ©  2023 Guardianes Gatunos. Todos los derechos reservados.</p>        
     </footer> 
+    
 
     <!-- SECTION UNO -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
